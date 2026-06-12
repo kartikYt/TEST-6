@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CBSE 2027 Most Expected Test - Real Numbers (Full)</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)']],
+                displayMath: [['\\[', '\\]']]
+            },
+            startup: { typeset: false } 
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+            overflow-x: hidden;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #c1c1c1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #a8a8a8; }
+
+        /* Animations */
+        @keyframes fadeInSlideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes pulseBorder {
+            0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.5); }
+            70% { box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+        }
+
+        .animate-fade-in-slide { animation: fadeInSlideUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+        .animate-fade { animation: fadeIn 0.4s ease-in-out forwards; }
+        .input-focus-pulse:focus { animation: pulseBorder 1.5s infinite; }
+
+        /* Option Radio Buttons Custom Styling */
+        .option-label { transition: all 0.2s ease; border: 2px solid transparent; }
+        .option-input:checked + .option-label {
+            border-color: #3b82f6; background-color: #eff6ff;
+        }
+
+        /* Palette Buttons */
+        .palette-btn { transition: transform 0.1s, box-shadow 0.1s; }
+        .palette-btn:hover { transform: scale(1.05); }
+        
+        .status-not-visited { background-color: #e5e7eb; color: #374151; }
+        .status-answered { background-color: #22c55e; color: white; }
+        .status-not-answered { background-color: #ef4444; color: white; }
+        .status-skipped { background-color: #f59e0b; color: white; }
+        .status-active { outline: 3px solid #3b82f6; outline-offset: 2px; }
+
+        /* Disable Selection for Exam Integrity */
+        .no-select { user-select: none; -webkit-user-select: none; -moz-user-select: none; }
+    </style>
+</head>
+<body class="text-gray-800 antialiased h-screen flex flex-col no-select">
+
+    <div id="screen1" class="flex-1 flex items-center justify-center bg-gradient-to-br from-blue-900 to-indigo-800 p-4 absolute inset-0 z-50">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md p-8 animate-fade-in-slide relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-2 bg-blue-500"></div>
+            <div class="text-center mb-8">
+                <i class="fas fa-graduation-cap text-5xl text-blue-600 mb-3"></i>
+                <h1 class="text-2xl font-bold text-gray-900">CBSE CBT Portal</h1>
+                <p class="text-sm text-gray-500 font-medium mt-1">Class 10th - Real Numbers (2027)</p>
+            </div>
+
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="space-y-5">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-1">Candidate Name</label>
+                        <input type="text" id="candName" required class="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-300 focus:outline-none focus:border-blue-500 focus:bg-white input-focus-pulse transition-colors" placeholder="Enter full name">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-1">CBSE 2027 Roll No.</label>
+                        <input type="text" id="candRoll" required pattern="[0-9]{7,10}" title="Enter a valid 7 to 10 digit CBSE Roll No" class="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-300 focus:outline-none focus:border-blue-500 focus:bg-white input-focus-pulse transition-colors" placeholder="e.g. 12345678">
+                    </div>
+                    
+                    <div class="bg-blue-50 rounded-lg p-4 flex flex-col items-center border border-blue-100">
+                        <span class="text-xs text-blue-600 font-bold uppercase tracking-wider mb-2">System Generated Security Code</span>
+                        <div class="bg-white border-2 border-dashed border-blue-300 px-6 py-2 rounded-lg font-mono text-2xl tracking-[0.25em] font-bold text-gray-800 select-none" id="displayCaptcha">
+                            00000
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-1">Enter Security Code</label>
+                        <input type="text" id="candCaptcha" required maxlength="5" class="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-300 focus:outline-none focus:border-blue-500 focus:bg-white input-focus-pulse transition-colors text-center font-mono tracking-widest text-lg" placeholder="•••••">
+                        <p id="captchaError" class="text-red-500 text-xs mt-1 hidden font-medium"><i class="fas fa-exclamation-circle mr-1"></i> Invalid security code. Try again.</p>
+                    </div>
+
+                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition-colors shadow-lg hover:shadow-xl flex justify-center items-center gap-2">
+                        <span>Authenticate & Proceed</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="screen2" class="hidden flex-1 bg-gray-100 p-4 md:p-8 absolute inset-0 z-40 overflow-y-auto">
+        <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden animate-fade-in-slide">
+            <div class="bg-gray-900 text-white p-6 flex justify-between items-center sticky top-0 z-10 shadow-md">
+                <div>
+                    <h2 class="text-xl font-bold">General Instructions</h2>
+                    <p class="text-gray-400 text-sm">Please read carefully before starting the exam</p>
+                </div>
+                <div class="bg-gray-800 px-4 py-2 rounded-lg flex items-center gap-3 border border-gray-700">
+                    <i class="fas fa-clock text-blue-400 animate-pulse"></i>
+                    <span id="instructionTimer" class="font-mono text-xl font-bold text-blue-400">00:30</span>
+                </div>
+            </div>
+            
+            <div class="p-6 md:p-8 space-y-6 text-gray-700">
+                <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-r-lg">
+                    <div class="flex items-start">
+                        <i class="fas fa-exclamation-triangle text-yellow-500 mt-1 mr-3"></i>
+                        <div>
+                            <h3 class="font-bold text-yellow-800">CRITICAL INSTRUCTION FOR ALL CANDIDATES</h3>
+                            <p class="text-yellow-700 mt-1 font-medium">You must write ALL answers, including the workings for MCQs and Subjective questions, in the physical answer sheet provided to you. The digital interface is for tracking and question delivery.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-gray-50 p-5 rounded-xl border border-gray-200">
+                        <h3 class="font-bold text-gray-900 mb-3 border-b pb-2"><i class="fas fa-info-circle mr-2 text-blue-600"></i>Exam Pattern</h3>
+                        <ul class="space-y-2 text-sm">
+                            <li><i class="fas fa-check text-green-500 mr-2"></i><strong>Topic:</strong> Real Numbers (Class 10 CBSE)</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i><strong>Total Questions:</strong> 22</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i><strong>Total Time:</strong> 1 Hour 39 Minutes</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i><strong>Marking Scheme:</strong> MCQs (+1), Subjective (+2), Word Problems (+3 or +4). No negative marking (-0).</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-gray-50 p-5 rounded-xl border border-gray-200">
+                        <h3 class="font-bold text-gray-900 mb-3 border-b pb-2"><i class="fas fa-palette mr-2 text-blue-600"></i>Navigation Palette</h3>
+                        <div class="grid grid-cols-2 gap-3 text-sm">
+                            <div class="flex items-center"><div class="w-6 h-6 rounded status-not-visited flex items-center justify-center font-bold text-xs mr-2 shadow-sm">1</div> Not Visited</div>
+                            <div class="flex items-center"><div class="w-6 h-6 rounded status-not-answered flex items-center justify-center font-bold text-xs mr-2 shadow-sm">2</div> Not Answered</div>
+                            <div class="flex items-center"><div class="w-6 h-6 rounded status-answered flex items-center justify-center font-bold text-xs mr-2 shadow-sm">3</div> Answered</div>
+                            <div class="flex items-center"><div class="w-6 h-6 rounded status-skipped flex items-center justify-center font-bold text-xs mr-2 shadow-sm">4</div> Skipped/Review</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-2 text-sm leading-relaxed">
+                    <p>1. The clock has been set at the server and the countdown timer at the top will display the time remaining.</p>
+                    <p>2. To select your answer for an MCQ, click on the desired option button. To deselect, click on "Clear Response".</p>
+                    <p>3. To change your answer, simply click on another option.</p>
+                    <p>4. Click on <strong>"Save & Next"</strong> to save your answer and move to the next question.</p>
+                    <p>5. Click on <strong>"Mark for Review & Skip"</strong> if you want to leave it for later.</p>
+                    <p>6. Your live webcam feed is active and monitored throughout the examination.</p>
+                </div>
+            </div>
+
+            <div class="p-6 bg-gray-50 border-t flex justify-end items-center">
+                <button id="btnProceed" disabled class="bg-gray-400 cursor-not-allowed text-white font-bold py-3 px-8 rounded-lg transition-all flex items-center gap-2">
+                    <span>I am ready to begin</span>
+                    <i class="fas fa-play"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="screen3" class="hidden flex-1 flex flex-col h-screen overflow-hidden animate-fade">
+        <header class="bg-white border-b shadow-sm py-3 px-6 flex justify-between items-center z-10 shrink-0">
+            <div class="flex items-center gap-4">
+                <div class="bg-blue-600 text-white w-10 h-10 rounded-lg flex items-center justify-center font-bold text-xl shadow-md">
+                    C
+                </div>
+                <div>
+                    <h2 class="font-bold text-gray-800 leading-tight">CBSE 2027 Most Expected Test</h2>
+                    <p class="text-xs text-gray-500 font-medium">Chapter: Real Numbers</p>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-6">
+                <div class="bg-red-50 border border-red-200 px-4 py-2 rounded-lg flex items-center gap-3">
+                    <i class="fas fa-hourglass-half text-red-500 animate-spin-slow" style="animation-duration: 3s;"></i>
+                    <span class="text-sm font-semibold text-gray-600 mr-2">Time Left:</span>
+                    <span id="mainTimer" class="font-mono text-2xl font-bold text-red-600 tracking-wider">01:39:00</span>
+                </div>
+                <button onclick="submitExamFinal()" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-6 rounded shadow-md transition-colors">
+                    Submit Exam
+                </button>
+            </div>
+        </header>
+
+        <div class="flex flex-1 overflow-hidden">
+            
+            <div class="flex-1 flex flex-col bg-white overflow-y-auto relative">
+                
+                <div class="border-b px-8 py-4 flex justify-between items-center bg-gray-50 sticky top-0 z-10">
+                    <h3 class="text-lg font-bold text-blue-800 flex items-center gap-2">
+                        <i class="fas fa-question-circle"></i>
+                        Question No. <span id="qNumberDisplay" class="text-2xl ml-1">1</span>
+                    </h3>
+                    <div class="text-sm font-medium text-gray-500 border border-gray-300 bg-white px-3 py-1 rounded shadow-sm">
+                        Marks: <span id="qMarksDisplay" class="text-green-600 font-bold">+1.0</span> | -0.0
+                    </div>
+                </div>
+
+                <div class="p-8 flex-1">
+                    <div id="questionText" class="text-lg text-gray-800 leading-relaxed mb-8 select-text">
+                        </div>
+
+                    <div id="optionsArea" class="space-y-4 max-w-3xl">
+                        </div>
+                    
+                    <div id="subjectiveNote" class="hidden mt-6 p-4 bg-blue-50 border-l-4 border-blue-500 rounded-r text-blue-800">
+                        <i class="fas fa-pencil-alt mr-2"></i> <strong>Subjective Question:</strong> Please solve this question step-by-step in the physical answer sheet provided. Click "Save & Next" once you have written down the answer.
+                    </div>
+                </div>
+
+                <div class="border-t bg-gray-50 px-8 py-4 flex justify-between items-center sticky bottom-0 z-10 shrink-0">
+                    <div class="flex gap-3">
+                        <button onclick="markReview()" class="bg-amber-500 hover:bg-amber-600 text-white font-semibold py-2 px-5 rounded shadow transition-colors flex items-center gap-2">
+                            <i class="fas fa-bookmark"></i> Mark for Review & Skip
+                        </button>
+                        <button onclick="clearResponse()" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-2 px-5 rounded shadow-sm transition-colors border border-gray-300">
+                            Clear Response
+                        </button>
+                    </div>
+                    <div class="flex gap-3">
+                        <button onclick="prevQuestion()" class="bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2 px-5 rounded shadow transition-colors flex items-center gap-2">
+                            <i class="fas fa-chevron-left"></i> Previous
+                        </button>
+                        <button onclick="saveAndNext()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded shadow-lg transition-colors flex items-center gap-2 text-lg">
+                            Save & Next <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-80 bg-gray-50 border-l flex flex-col shrink-0 shadow-[-4px_0_15px_rgba(0,0,0,0.03)] z-20">
+                
+                <div class="p-4 border-b bg-white">
+                    <div class="w-full h-40 bg-black rounded-lg overflow-hidden mb-3 relative shadow-inner border border-gray-200">
+                        <iframe id="mirrorIframe" src="https://fullscreenmirror.com/" allow="camera" class="w-full h-full border-0"></iframe>
+                        <div class="absolute top-2 right-2 flex items-center gap-1 bg-black/60 text-white px-2 py-1 rounded text-xs font-bold backdrop-blur-sm pointer-events-none">
+                            <div class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></div>
+                            LIVE
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 border border-indigo-200 shrink-0">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="overflow-hidden">
+                            <p id="displayCandName" class="font-bold text-gray-800 text-sm truncate">Candidate Name</p>
+                            <p id="displayCandRoll" class="text-xs text-gray-500 font-mono">Roll: --------</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-4 border-b grid grid-cols-2 gap-3 text-xs font-medium text-gray-600">
+                    <div class="flex items-center gap-2"><div class="w-5 h-5 rounded status-answered flex items-center justify-center text-white shadow-sm" id="countAnswered">0</div> Answered</div>
+                    <div class="flex items-center gap-2"><div class="w-5 h-5 rounded status-not-answered flex items-center justify-center text-white shadow-sm" id="countUnanswered">0</div> Not Answered</div>
+                    <div class="flex items-center gap-2"><div class="w-5 h-5 rounded status-not-visited shadow-sm" id="countNotVisited">22</div> Not Visited</div>
+                    <div class="flex items-center gap-2"><div class="w-5 h-5 rounded status-skipped flex items-center justify-center text-white shadow-sm" id="countSkipped">0</div> Skipped</div>
+                </div>
+
+                <div class="p-4 flex-1 overflow-y-auto">
+                    <h3 class="font-bold text-gray-700 mb-4 text-sm uppercase tracking-wider">Question Palette</h3>
+                    <div id="paletteGrid" class="grid grid-cols-5 gap-2">
+                        </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <div id="submissionOverlay" class="hidden fixed inset-0 bg-blue-900 bg-opacity-95 z-[100] flex flex-col items-center justify-center text-white animate-fade">
+        <i class="fas fa-check-circle text-6xl text-green-400 mb-4"></i>
+        <h1 class="text-3xl font-bold mb-2">Exam Submitted Successfully</h1>
+        <p class="text-blue-200">Your responses and webcam logs have been recorded.</p>
+        <p class="mt-4 font-medium text-lg">Please hand over your physical answer sheet to the invigilator.</p>
+    </div>
+
+    <script>
+        // --- 1. Exam Data Preparation ---
+        const questionsData = [
+            {
+                type: "subjective",
+                marks: 4.0, 
+                text: "Ravish runs a book shop at school of Math, Gurgaon. He received 480 chemistry books, 192 physics books and 672 Mathematics books of class XI. He wishes to arrange these books in minimum numbers of stacks such that each stack consists of the books on only one subject and the number of books in each stack is the same.<br><br><img src='https://i.ibb.co/HpTZhQFD/Screenshot-20260611-210731-Chrome-1.jpg' alt='Bookshop Diagram' class='my-6 max-w-full h-auto rounded-lg shadow-md border border-gray-200'><br><br>(a) Find the number of books in each stack.<br>(b) Find the Number of stacks of Mathematics books are.<br>(c) Find the Minimum number of stacks of all the books.<br>(d) Find the Difference in number of stacks of Mathematics books and sum of stacks of Physics and Chemistry books is."
+            },
+            {
+                type: "subjective",
+                marks: 2.0,
+                text: "Prove that value \\(\\sqrt{3}\\) is irrational?"
+            },
+            {
+                type: "mcq",
+                marks: 1.0,
+                text: "The HCF of the smallest composite number and the smallest prime no. is:",
+                options: ["1", "2", "4", "8"]
+            },
+            {
+                type: "mcq",
+                marks: 1.0,
+                text: "If two positive integer \\(p\\) and \\(q\\) can be expressed as \\(p=a^2b^3\\) and \\(q=a^3b\\) where \\(a\\) and \\(b\\) are prime numbers then \\(LCM(p,q)\\) is:",
+                options: ["\\(ab\\)", "\\(a^2b^2\\)", "\\(a^3b^3\\)", "\\(a^3b^2\\)"]
+            },
+            {
+                type: "mcq",
+                marks: 1.0,
+                text: "(S1): \\(LCM(a,b,c) \\times HCF(a,b,c) = a \\times b \\times c\\)<br>(S2): \\(LCM(a,b) \\times HCF(a,b) = a \\times b\\)",
+                options: ["Both (S1) and (S2) are true.", "Both (S1) and (S2) are false.", "(S1) is true, but (S2) is false.", "(S1) is false, but (S2) is true."]
+            },
+            {
+                type: "mcq",
+                marks: 1.0,
+                text: "\\(n^2-1\\) is divisible by 8 if \\(n\\) is:",
+                options: ["an integer", "a natural number", "an odd integer", "an even integer"]
+            },
+            {
+                type: "mcq",
+                marks: 1.0,
+                text: "Which of the following is an irrational number?",
+                options: ["\\(\\frac{22}{7}\\)", "\\(3.1416\\)", "\\(3.\\overline{14}\\)", "\\(\\pi\\)"]
+            },
+            {
+                type: "mcq",
+                marks: 1.0,
+                text: "The HCF of \\(2^3 \\times 3^2 \\times 5\\) and \\(2^2 \\times 3^3 \\times 5^2\\) is:",
+                options: ["\\(2^3 \\times 3^3 \\times 5^2\\)", "\\(2^2 \\times 3^2 \\times 5\\)", "\\(2^2 \\times 3^2\\)", "\\(2 \\times 3 \\times 5\\)"]
+            },
+            {
+                type: "subjective",
+                marks: 2.0,
+                text: "The LCM of two prime numbers \\(p\\) and \\(q\\) (\\(p>q\\)) is 221. Find the value of \\(3p-q\\)."
+            },
+            {
+                type: "subjective",
+                marks: 2.0,
+                text: "Explain why \\(7 \\times 11 \\times 13 + 13\\) is a composite number."
+            },
+            {
+                type: "subjective",
+                marks: 2.0,
+                text: "Check whether \\(6^n\\) can end with digit 0 for any natural number \\(n\\)."
+            },
+            {
+                type: "subjective",
+                marks: 2.0,
+                text: "Prove that \\(\\frac{1}{\\sqrt{2}}\\) is irrational."
+            },
+            {
+                type: "subjective",
+                marks: 3.0,
+                text: "Three bells toll (Make sound) at interval of 12, 15 and 18 minutes respectively. If they start tolling together at 9:00 am, at what time will they next toll together?"
+            },
+            {
+                type: "subjective",
+                marks: 3.0,
+                text: "Two tankers contain 850 lit and 680 lit of petrol respectively. Find the maximum capacity of a container which can measure the petrol of both the tankers when used an exact number of times."
+            },
+            {
+                type: "subjective",
+                marks: 2.0,
+                text: "The values of \\(x\\) and \\(y\\) in the given factor tree are to be determined:<br><br>• Node \\(y\\) branches down to 4 and Node \\(x\\).<br>• Node \\(x\\) branches down to 3 and 7.<br><br>Find \\(x\\) and \\(y\\)."
+            },
+            {
+                type: "mcq",
+                marks: 1.0,
+                text: "\\(\\pi - \\frac{22}{7}\\) is:",
+                options: ["a rational num", "irrational number", "a prime num", "an even number"]
+            },
+            {
+                type: "mcq",
+                marks: 1.0,
+                text: "The largest number which divides 70 and 125 leaving remainder 5 and 8 respectively:",
+                options: ["13", "65", "875", "1750"]
+            },
+            {
+                type: "mcq",
+                marks: 1.0,
+                text: "The decimal expansion of the rational number \\(\\frac{14587}{1250}\\) will terminate after:",
+                options: ["one decimal place", "two decimal place", "three decimal place", "four decimal place"]
+            },
+            {
+                type: "subjective",
+                marks: 2.0,
+                text: "Prove that \\(5-\\sqrt{3}\\) is irrational number."
+            },
+            {
+                type: "subjective",
+                marks: 2.0,
+                text: "Prove that \\((2+\\sqrt{3})^2\\) is irrational given \\(\\sqrt{3}\\) is irrational."
+            },
+            {
+                type: "subjective",
+                marks: 2.0,
+                text: "Find value of \\(\\left(\\frac{x^m}{x^n}\\right)^l \\cdot \\left(\\frac{x^n}{x^l}\\right)^m \\cdot \\left(\\frac{x^l}{x^m}\\right)^n\\)"
+            },
+            {
+                type: "subjective",
+                marks: 2.0,
+                text: "\\(\\sqrt[lm]{\\frac{x^l}{x^m}} \\cdot \\sqrt[mn]{\\frac{x^m}{x^n}} \\cdot \\sqrt[nl]{\\frac{x^n}{x^l}}\\) <br><br>Find its value."
+            }
+        ];
+
+        // --- 2. State Variables ---
+        let generatedCaptcha = "";
+        let currentQuestionIdx = 0;
+        let examTimerSeconds = 1 * 3600 + 39 * 60; // 1 hour 39 mins = 5940 seconds
+        let examInterval = null;
+        
+        let qStatus = Array(questionsData.length).fill('not_visited');
+        let userAnswers = Array(questionsData.length).fill(null);
+
+        // --- 3. Initial Setup & Captcha ---
+        function generateCaptcha() {
+            const num = Math.floor(10000 + Math.random() * 90000);
+            generatedCaptcha = num.toString();
+            document.getElementById('displayCaptcha').innerText = generatedCaptcha;
+        }
+
+        window.onload = function() {
+            generateCaptcha();
+        };
+
+        // --- 4. Login Logic ---
+        function handleLogin(e) {
+            e.preventDefault();
+            const inputName = document.getElementById('candName').value.trim();
+            const inputRoll = document.getElementById('candRoll').value.trim();
+            const inputCaptcha = document.getElementById('candCaptcha').value.trim();
+
+            if (inputCaptcha !== generatedCaptcha) {
+                document.getElementById('captchaError').classList.remove('hidden');
+                generateCaptcha();
+                document.getElementById('candCaptcha').value = '';
+                return;
+            }
+
+            document.getElementById('displayCandName').innerText = inputName;
+            document.getElementById('displayCandRoll').innerText = "Roll: " + inputRoll;
+
+            document.getElementById('screen1').classList.add('hidden');
+            document.getElementById('screen2').classList.remove('hidden');
+            
+            startInstructionTimer();
+        }
+
+        // --- 5. Instruction Timer Logic ---
+        function startInstructionTimer() {
+            let timeLeft = 30;
+            const timerEl = document.getElementById('instructionTimer');
+            const btn = document.getElementById('btnProceed');
+            
+            const instInterval = setInterval(() => {
+                timeLeft--;
+                timerEl.innerText = `00:${timeLeft < 10 ? '0'+timeLeft : timeLeft}`;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(instInterval);
+                    timerEl.innerText = "00:00";
+                    timerEl.classList.remove('text-blue-400');
+                    timerEl.classList.add('text-green-500');
+                    
+                    btn.disabled = false;
+                    btn.classList.remove('bg-gray-400', 'cursor-not-allowed');
+                    btn.classList.add('bg-green-600', 'hover:bg-green-700');
+                    btn.innerHTML = `<span>Start Exam Now</span> <i class="fas fa-play"></i>`;
+                    btn.onclick = beginExam;
+                }
+            }, 1000);
+        }
+
+        // --- 6. Start Main Exam ---
+        function beginExam() {
+            document.getElementById('screen2').classList.add('hidden');
+            document.getElementById('screen3').classList.remove('hidden');
+            
+            initWebcam();
+            buildPalette();
+            loadQuestion(0);
+            startExamTimer();
+        }
+
+        function initWebcam() {
+            // Replaced by fullscreenmirror.com iframe in the HTML
+        }
+
+        function startExamTimer() {
+            const timerEl = document.getElementById('mainTimer');
+            
+            examInterval = setInterval(() => {
+                examTimerSeconds--;
+                if(examTimerSeconds <= 0) {
+                    clearInterval(examInterval);
+                    submitExamFinal();
+                    return;
+                }
+                
+                let h = Math.floor(examTimerSeconds / 3600);
+                let m = Math.floor((examTimerSeconds % 3600) / 60);
+                let s = examTimerSeconds % 60;
+                
+                timerEl.innerText = 
+                    (h < 10 ? "0"+h : h) + ":" + 
+                    (m < 10 ? "0"+m : m) + ":" + 
+                    (s < 10 ? "0"+s : s);
+                    
+                if(examTimerSeconds < 300) {
+                    timerEl.classList.add('animate-pulse');
+                }
+            }, 1000);
+        }
+
+        // --- 7. Core Exam UI Updates ---
+        function buildPalette() {
+            const grid = document.getElementById('paletteGrid');
+            grid.innerHTML = '';
+            
+            questionsData.forEach((_, i) => {
+                const btn = document.createElement('button');
+                btn.id = `palBtn-${i}`;
+                btn.className = `palette-btn w-full aspect-square rounded-lg font-bold text-sm shadow-sm flex items-center justify-center status-${qStatus[i].replace('_', '-')}`;
+                btn.innerText = i + 1;
+                btn.onclick = () => jumpToQuestion(i);
+                grid.appendChild(btn);
+            });
+            updateLegendCount();
+        }
+
+        function updateLegendCount() {
+            let ans = 0, unans = 0, skip = 0, notvis = 0;
+            qStatus.forEach(s => {
+                if(s === 'answered') ans++;
+                else if(s === 'not_answered') unans++;
+                else if(s === 'skipped') skip++;
+                else notvis++;
+            });
+            document.getElementById('countAnswered').innerText = ans;
+            document.getElementById('countUnanswered').innerText = unans;
+            document.getElementById('countSkipped').innerText = skip;
+            document.getElementById('countNotVisited').innerText = notvis;
+        }
+
+        function refreshPalette() {
+            questionsData.forEach((_, i) => {
+                const btn = document.getElementById(`palBtn-${i}`);
+                btn.classList.remove('status-not-visited', 'status-answered', 'status-not-answered', 'status-skipped', 'status-active');
+                btn.classList.add(`status-${qStatus[i].replace('_', '-')}`);
+                if(i === currentQuestionIdx) {
+                    btn.classList.add('status-active');
+                }
+            });
+            updateLegendCount();
+        }
+
+        function loadQuestion(idx) {
+            syncAnswerFromUI();
+            
+            if (qStatus[idx] === 'not_visited') {
+                qStatus[idx] = 'not_answered';
+            }
+            
+            currentQuestionIdx = idx;
+            document.getElementById('qNumberDisplay').innerText = idx + 1;
+            
+            const q = questionsData[idx];
+            document.getElementById('questionText').innerHTML = q.text;
+            
+            // Dynamic marks update
+            const qMarksDisplay = document.getElementById('qMarksDisplay');
+            qMarksDisplay.innerText = `+${q.marks.toFixed(1)}`;
+            
+            const optsArea = document.getElementById('optionsArea');
+            const subjNote = document.getElementById('subjectiveNote');
+            
+            optsArea.innerHTML = '';
+            
+            if (q.type === 'mcq') {
+                subjNote.classList.add('hidden');
+                optsArea.classList.remove('hidden');
+                
+                q.options.forEach((opt, oIdx) => {
+                    const checked = userAnswers[idx] === oIdx ? 'checked' : '';
+                    const html = `
+                        <div class="relative">
+                            <input type="radio" name="qOption" id="opt-${oIdx}" value="${oIdx}" class="peer hidden option-input" ${checked}>
+                            <label for="opt-${oIdx}" class="option-label block w-full bg-white p-4 rounded-xl shadow-sm cursor-pointer hover:bg-gray-50 flex items-start gap-4">
+                                <div class="w-6 h-6 rounded-full border-2 border-gray-400 flex items-center justify-center shrink-0 mt-0.5 peer-checked:border-blue-600 peer-checked:bg-blue-600">
+                                    <span class="text-xs font-bold ${checked ? 'text-white' : 'text-gray-500'}">
+                                        ${String.fromCharCode(65 + oIdx)}
+                                    </span>
+                                </div>
+                                <div class="flex-1 text-gray-800 text-lg">
+                                    ${opt}
+                                </div>
+                            </label>
+                        </div>
+                    `;
+                    optsArea.innerHTML += html;
+                });
+            } else {
+                subjNote.classList.remove('hidden');
+                optsArea.classList.add('hidden');
+                if(userAnswers[idx] === null) userAnswers[idx] = "attempted_on_paper";
+            }
+
+            refreshPalette();
+
+            if(window.MathJax) {
+                MathJax.typesetPromise([document.getElementById('questionText'), document.getElementById('optionsArea')])
+                    .catch((err) => console.log('MathJax Error: ', err));
+            }
+        }
+
+        // --- 8. Nav Actions ---
+        function syncAnswerFromUI() {
+            const q = questionsData[currentQuestionIdx];
+            if(q.type === 'mcq') {
+                const selected = document.querySelector('input[name="qOption"]:checked');
+                if (selected) {
+                    userAnswers[currentQuestionIdx] = parseInt(selected.value);
+                } else {
+                    userAnswers[currentQuestionIdx] = null;
+                }
+            }
+        }
+
+        function saveAndNext() {
+            syncAnswerFromUI();
+            
+            if(questionsData[currentQuestionIdx].type === 'mcq') {
+                if(userAnswers[currentQuestionIdx] !== null) {
+                    qStatus[currentQuestionIdx] = 'answered';
+                } else {
+                    qStatus[currentQuestionIdx] = 'not_answered';
+                }
+            } else {
+                qStatus[currentQuestionIdx] = 'answered';
+            }
+
+            if(currentQuestionIdx < questionsData.length - 1) {
+                loadQuestion(currentQuestionIdx + 1);
+            } else {
+                refreshPalette();
+                alert("You have reached the last question. Please review your answers from the palette.");
+            }
+        }
+
+        function markReview() {
+            syncAnswerFromUI();
+            qStatus[currentQuestionIdx] = 'skipped'; 
+            
+            if(currentQuestionIdx < questionsData.length - 1) {
+                loadQuestion(currentQuestionIdx + 1);
+            } else {
+                refreshPalette();
+            }
+        }
+
+        function clearResponse() {
+            if(questionsData[currentQuestionIdx].type === 'mcq') {
+                const checked = document.querySelector('input[name="qOption"]:checked');
+                if(checked) checked.checked = false;
+                userAnswers[currentQuestionIdx] = null;
+                qStatus[currentQuestionIdx] = 'not_answered';
+                refreshPalette();
+            }
+        }
+
+        function prevQuestion() {
+            if(currentQuestionIdx > 0) {
+                loadQuestion(currentQuestionIdx - 1);
+            }
+        }
+
+        function jumpToQuestion(idx) {
+            loadQuestion(idx);
+        }
+
+        function submitExamFinal() {
+            const conf = confirm("Are you sure you want to submit the exam? No changes can be made after submission.");
+            if(conf || examTimerSeconds <= 0) {
+                clearInterval(examInterval);
+                document.getElementById('screen3').classList.add('hidden');
+                document.getElementById('submissionOverlay').classList.remove('hidden');
+                
+                const mirrorFrame = document.getElementById('mirrorIframe');
+                if(mirrorFrame) {
+                    mirrorFrame.src = "";
+                }
+            }
+        }
+    </script>
+</body>
+</html>
