@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cbse class 10th 2027 test 6</title>
+    
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            },
+            startup: {
+                typeset: false // We trigger typesetting manually when questions load
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        :root {
+            /* Cyber Dark Theme Palette */
+            --bg-color: #0b0f19;
+            --panel-bg: rgba(20, 26, 38, 0.6);
+            --panel-border: rgba(0, 255, 255, 0.15);
+            
+            --accent: #00d2ff;
+            --accent-glow: rgba(0, 210, 255, 0.8);
+            
+            --text-main: #e2e8f0;
+            --text-muted: #94a3b8;
+            
+            --unattempted: #ff2a2a; 
+            --unattempted-glow: rgba(255, 42, 42, 0.6);
+            
+            --attempted: #00ff88;   
+            --attempted-glow: rgba(0, 255, 136, 0.6);
+            
+            --review: #ffb700;      
+            --review-glow: rgba(255, 183, 0, 0.6);
+            
+            --not-visited: #334155; 
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
+        
+        body { 
+            background-color: var(--bg-color); 
+            background-image: radial-gradient(circle at 50% 0%, #1a233a 0%, #0b0f19 70%);
+            color: var(--text-main); 
+            height: 100vh; 
+            overflow: hidden; 
+            perspective: 1200px; 
+        }
+
+        /* --- 3D Glass Panels --- */
+        .glass-panel {
+            background: var(--panel-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--panel-border);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1);
+        }
+
+        .screen { display: none; height: 100vh; width: 100vw; flex-direction: column; }
+        .screen.active { display: flex; animation: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+        @keyframes slideUpFade { 
+            from { opacity: 0; transform: translateY(40px) scale(0.98) rotateX(-5deg); } 
+            to { opacity: 1; transform: translateY(0) scale(1) rotateX(0); } 
+        }
+
+        /* --- Intense Glow Animations --- */
+        @keyframes cyber-pulse {
+            0% { box-shadow: 0 0 5px var(--accent-glow), inset 0 0 5px var(--accent-glow); }
+            50% { box-shadow: 0 0 20px var(--accent), 0 0 10px var(--accent), inset 0 0 10px var(--accent-glow); }
+            100% { box-shadow: 0 0 5px var(--accent-glow), inset 0 0 5px var(--accent-glow); }
+        }
+        .glowing-btn { 
+            animation: cyber-pulse 2s infinite; 
+            border: 1px solid var(--accent); 
+            color: white; 
+            text-shadow: 0 0 8px rgba(255,255,255,0.8);
+        }
+
+        /* --- Buttons --- */
+        button { 
+            padding: 10px 20px; cursor: pointer; background: #1e293b; color: white; 
+            border: 1px solid #475569; border-radius: 6px; font-weight: 600; 
+            transition: all 0.2s ease; transform-style: preserve-3d;
+        }
+        button:hover:not(:disabled) { 
+            transform: translateY(-3px) translateZ(10px); 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4); 
+            border-color: var(--accent);
+        }
+        button:active:not(:disabled) { transform: translateY(1px) translateZ(0px); }
+        button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        /* --- Header --- */
+        header { 
+            background: rgba(11, 15, 25, 0.8); backdrop-filter: blur(10px);
+            padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; 
+            border-bottom: 2px solid var(--accent); z-index: 10;
+            box-shadow: 0 5px 20px rgba(0, 210, 255, 0.15);
+        }
+
+        /* --- Registration & Wait Screen --- */
+        .centered-box { 
+            margin: auto; width: 650px; border-radius: 12px; 
+            display: flex; flex-direction: column; max-height: 85vh; 
+            transform: translateZ(30px);
+        }
+        .box-header { padding: 20px; border-bottom: 1px solid var(--panel-border); background: rgba(0,0,0,0.2); border-radius: 12px 12px 0 0;}
+        .box-content { padding: 30px; overflow-y: auto; flex-grow: 1; }
+        .box-footer { padding: 20px; text-align: right; border-top: 1px solid var(--panel-border); background: rgba(0,0,0,0.2); border-radius: 0 0 12px 12px;}
+
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-size: 13px; font-weight: bold; color: var(--accent); text-transform: uppercase; letter-spacing: 1px;}
+        .form-group input { 
+            width: 100%; padding: 12px; border: 1px solid #475569; 
+            border-radius: 6px; background: rgba(0,0,0,0.3); color: white; 
+            transition: all 0.3s;
+        }
+        .form-group input:focus { border-color: var(--accent); box-shadow: 0 0 15px rgba(0, 210, 255, 0.3); outline: none; }
+        
+        #webcam-preview-container { text-align: center; border: 2px dashed #475569; padding: 15px; border-radius: 8px; background: rgba(0,0,0,0.3); }
+        #webcam-setup { width: 100%; max-width: 250px; border-radius: 6px; display: none; margin: 10px auto; background: #000; box-shadow: 0 5px 15px rgba(0,0,0,0.5);}
+
+        /* --- Screen 3: Test Engine --- */
+        .test-engine { display: flex; flex-grow: 1; height: calc(100vh - 65px); gap: 15px; padding: 15px; }
+        
+        /* Left Panel */
+        .left-panel { width: 280px; display: flex; flex-direction: column; border-radius: 12px; overflow: hidden; }
+        .panel-tabs { display: flex; border-bottom: 1px solid var(--panel-border); }
+        .panel-tab { flex: 1; text-align: center; padding: 12px; font-size: 12px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); transition: 0.3s;}
+        .panel-tab.active { color: var(--accent); border-bottom: 2px solid var(--accent); background: rgba(0, 210, 255, 0.05); text-shadow: 0 0 8px var(--accent-glow); }
+        
+        .settings-content { padding: 20px; flex-grow: 1; overflow-y: auto; font-size: 13px; }
+        .setting-item { margin-bottom: 20px; }
+        .setting-item label { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; color: var(--accent); }
+        .setting-item input[type="range"] { width: 100%; cursor: pointer; }
+        
+        .candidate-box { padding: 15px; background: rgba(0,0,0,0.4); border-top: 1px solid var(--panel-border); }
+        #webcam-test { width: 100%; height: 140px; object-fit: cover; border-radius: 8px; border: 2px solid var(--accent); box-shadow: 0 0 15px rgba(0, 210, 255, 0.2); }
+        .candidate-info { margin-top: 12px; font-size: 12px; color: var(--text-muted); line-height: 1.6; }
+        .candidate-info strong { color: white; }
+
+        /* Center Main Panel */
+        .main-panel { flex-grow: 1; display: flex; flex-direction: column; border-radius: 12px; position: relative; overflow: hidden; }
+        
+        .top-toolbar { display: flex; justify-content: space-between; padding: 12px 20px; border-bottom: 1px solid var(--panel-border); background: rgba(0,0,0,0.2); }
+        .q-type-badge { background: transparent; border: 1px solid var(--accent); color: var(--accent); padding: 4px 10px; border-radius: 4px; font-weight: bold; font-size: 11px; letter-spacing: 2px; box-shadow: 0 0 8px rgba(0,210,255,0.2); }
+        
+        .question-scroll-area { flex-grow: 1; padding: 40px; overflow-y: auto; position: relative; }
+        .question-container { font-size: 18px; line-height: 1.8; transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        
+        /* Options Styling - 3D Hover */
+        .options-list { list-style-type: none; margin-top: 30px; }
+        .options-list li { margin-bottom: 15px; border-radius: 8px; transition: all 0.2s; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); transform: translateZ(0); }
+        .options-list li:hover { border-color: var(--accent); background: rgba(0, 210, 255, 0.05); transform: translateX(10px) translateZ(10px); box-shadow: -5px 5px 15px rgba(0,0,0,0.3); }
+        .options-list label { display: flex; align-items: center; padding: 15px 20px; cursor: pointer; width: 100%; }
+        .options-list input { margin-right: 20px; width: 20px; height: 20px; cursor: pointer; accent-color: var(--accent); }
+
+        .action-bar { padding: 20px 30px; border-top: 1px solid var(--panel-border); background: rgba(0,0,0,0.3); display: flex; justify-content: space-between; }
+
+        /* Right Panel: Palette */
+        .right-panel { width: 340px; border-radius: 12px; display: flex; flex-direction: column; }
+        .palette-header { padding: 15px 20px; font-weight: bold; font-size: 14px; border-bottom: 1px solid var(--panel-border); display: flex; justify-content: space-between; color: var(--accent); text-transform: uppercase; letter-spacing: 1px;}
+        
+        .palette-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; padding: 20px; overflow-y: auto; perspective: 500px; }
+        
+        /* 3D Palette Buttons */
+        .q-btn { 
+            height: 45px; border: 1px solid transparent; border-radius: 8px; 
+            font-weight: bold; font-size: 15px; color: white; position: relative;
+            transform-style: preserve-3d; transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        .q-btn.unattempted { background: linear-gradient(145deg, #cc2323, #ff2a2a); box-shadow: 0 4px 0 #991a1a, 0 5px 10px rgba(0,0,0,0.5); border-color: #ff5555; }
+        .q-btn.attempted { background: linear-gradient(145deg, #00cc6d, #00ff88); color: black; box-shadow: 0 4px 0 #009952, 0 5px 10px rgba(0,0,0,0.5); border-color: #55ffaa; }
+        .q-btn.review { background: linear-gradient(145deg, #cca400, #ffb700); color: black; box-shadow: 0 4px 0 #997300, 0 5px 10px rgba(0,0,0,0.5); border-radius: 50%; border-color: #ffd055;}
+        .q-btn.not-visited { background: linear-gradient(145deg, #2a3545, #334155); box-shadow: 0 4px 0 #1a202c, 0 5px 10px rgba(0,0,0,0.5); }
+        
+        .q-btn:active { transform: translateY(4px); box-shadow: 0 0 0 transparent; }
+        
+        .q-btn.active-q { 
+            transform: scale(1.15) translateZ(20px); 
+            border: 2px solid white; 
+            box-shadow: 0 0 20px rgba(255,255,255,0.5), 0 10px 20px rgba(0,0,0,0.5) !important; 
+            z-index: 10;
+        }
+
+        .legend { padding: 20px; font-size: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; border-top: 1px solid var(--panel-border); background: rgba(0,0,0,0.2); }
+        .legend div { display: flex; align-items: center; color: var(--text-muted); }
+        .legend-box { width: 16px; height: 16px; margin-right: 10px; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.5);}
+        .legend-box.review-shape { border-radius: 50%; }
+
+        /* Custom Scrollbars */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: rgba(0,0,0,0.2); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb { background: #475569; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+    </style>
+</head>
+<body>
+
+    <div id="screen1" class="screen active">
+        <header>
+            <div style="font-size: 20px; font-weight: bold; color: var(--accent); text-shadow: 0 0 10px var(--accent-glow);">
+                Cbse class 10th 2027 test 6
+            </div>
+            <div style="color: var(--text-muted);"><span id="current-date"></span> | <span id="current-time"></span></div>
+        </header>
+        <div class="centered-box glass-panel" style="margin-top: 60px;">
+            <div class="box-header">
+                <h3 style="color: white; text-shadow: 0 0 8px rgba(255,255,255,0.5);">System Initialization & Rules</h3>
+            </div>
+            <div class="box-content">
+                <p style="font-size: 16px; text-align: center;"><strong>Bypassing security protocols in: <span id="wait-timer" style="color: var(--unattempted); font-size: 24px; text-shadow: 0 0 10px var(--unattempted-glow);">35</span>s</strong></p>
+                <div style="margin: 25px 0; border-top: 1px solid rgba(255,255,255,0.1);"></div>
+                <h4 style="color: var(--accent); margin-bottom: 10px;">Module: Mathematics</h4>
+                <ul style="margin-left: 20px; font-size: 15px; line-height: 1.8; color: var(--text-muted);">
+                    <li><strong>Format Verification:</strong> The engine will supply <span style="color: white;">SCA (Single Correct)</span> and <span style="color: white;">SA (Subjective Answer)</span> formats. Utilize the text boxes for subjective proofs.</li>
+                    <li><strong>3D Rendering Engine:</strong> UI depth mapping is active. Hover over options to inspect.</li>
+                    <li><strong>Math Engine:</strong> High-fidelity MathJax v3 rendering is online.</li>
+                </ul>
+            </div>
+            <div class="box-footer">
+                <button id="btn-proceed" disabled onclick="showScreen('screen2')" style="padding: 12px 25px; font-size: 15px;">Initialize Identity Verification</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="screen2" class="screen">
+        <header>
+            <div style="font-size: 20px; font-weight: bold; color: var(--accent);">
+                Cbse class 10th 2027 test 6 - Authentication
+            </div>
+        </header>
+        <div class="centered-box glass-panel" style="margin-top: 50px; width: 750px;">
+            <div class="box-header">
+                <h3 style="color: white;">Candidate Profile Matrix</h3>
+            </div>
+            <div class="box-content" style="display: flex; gap: 30px;">
+                <div style="flex: 1.5;">
+                    <div class="form-grid">
+                        <div class="form-group"><label>Registration ID</label><input type="text" id="inp-roll" placeholder="Ex: QTM-8842"></div>
+                        <div class="form-group"><label>Legal Name</label><input type="text" id="inp-name" placeholder="Enter full name"></div>
+                        <div class="form-group"><label>Age Matrix</label><input type="number" id="inp-age" placeholder="Verify Age"></div>
+                        <div class="form-group"><label>Date of Origin</label><input type="date" id="inp-dob"></div>
+                    </div>
+                </div>
+                <div style="flex: 1; display: flex; flex-direction: column; justify-content: center;">
+                    <div id="webcam-preview-container">
+                        <p style="font-size: 13px; margin-bottom: 15px; color: var(--text-muted);">Optical Sensor Calibration</p>
+                        <video id="webcam-setup" autoplay muted></video>
+                        <button id="btn-camera" onclick="startCamera()" style="width: 100%; background: #0f172a; border-color: var(--accent); color: var(--accent);">Enable Sensor</button>
+                    </div>
+                </div>
+            </div>
+            <div class="box-footer">
+                <button id="btn-start-test" disabled onclick="initTest()" class="glowing-btn" style="font-size: 18px; padding: 15px 40px; background: transparent;">Engage Assessment Core</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="screen3" class="screen">
+        <header>
+            <div style="display: flex; align-items: center; gap: 20px;">
+                <strong style="font-size: 18px; letter-spacing: 1px; color: var(--accent);">Cbse class 10th 2027 test 6 - Assessment</strong>
+            </div>
+            <div style="background: rgba(255, 42, 42, 0.1); border: 1px solid var(--unattempted); color: #ff5555; padding: 8px 20px; border-radius: 4px; font-weight: bold; letter-spacing: 2px; box-shadow: 0 0 15px var(--unattempted-glow);">
+                T-MINUS: <span id="test-timer" style="font-size: 20px;">180:00</span>
+            </div>
+        </header>
+        
+        <div class="test-engine">
+            <div class="left-panel glass-panel">
+                <div class="panel-tabs">
+                    <div class="panel-tab active" onclick="toggleLeftTab('settings')">System Config</div>
+                    <div class="panel-tab" onclick="toggleLeftTab('info')">Intel</div>
+                </div>
+                
+                <div class="settings-content" id="tab-settings">
+                    <div class="setting-item">
+                        <label>Spatial Zoom <span>(1.0x)</span></label>
+                        <input type="range" id="ui-zoom" min="0.8" max="1.5" step="0.1" value="1">
+                    </div>
+                    <div class="setting-item">
+                        <label>3D Tilt Effect</label>
+                        <label style="display: flex; align-items: center; cursor: pointer; color: white;">
+                            <input type="checkbox" id="tilt-toggle" style="margin-right: 10px; width: 16px; height: 16px; accent-color: var(--accent);" checked> Active
+                        </label>
+                    </div>
+                </div>
+
+                <div class="settings-content" id="tab-info" style="display: none; color: var(--text-muted);">
+                    <p>Identify formats carefully.</p>
+                    <p style="margin-top: 10px; color: white;">Radio Buttons = SCA</p>
+                    <p style="color: white;">Text Area = SA</p>
+                </div>
+                
+                <div class="candidate-box">
+                    <video id="webcam-test" autoplay muted></video>
+                    <div class="candidate-info">
+                        Identity: <strong id="disp-name" style="color: var(--accent);">--</strong><br>
+                        Reg ID: <strong id="disp-roll">--</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-panel glass-panel">
+                <div class="top-toolbar">
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <span id="q-format-badge" class="q-type-badge">SCA</span>
+                        <span style="font-size: 16px; font-weight: bold; color: white; text-shadow: 0 0 5px rgba(255,255,255,0.5);">Query <span id="q-num-display">1</span></span>
+                    </div>
+                    <button style="background: transparent; border: 1px solid #ff2a2a; color: #ff2a2a; padding: 4px 12px; font-size: 12px;">Report Anomaly</button>
+                </div>
+                
+                <div class="question-scroll-area" id="tilt-container">
+                    <div class="question-container" id="q-container">
+                        </div>
+                </div>
+
+                <div class="action-bar">
+                    <div style="display: flex; gap: 15px;">
+                        <button style="background: rgba(255, 183, 0, 0.1); color: var(--review); border-color: var(--review);" onclick="markReview()">Mark Review & Next</button>
+                        <button style="background: transparent; color: var(--text-muted); border-color: #475569;" onclick="clearResponse()">Wipe Data</button>
+                    </div>
+                    <div>
+                        <button style="background: rgba(0, 255, 136, 0.1); border-color: var(--attempted); color: var(--attempted);" class="glowing-btn" onclick="saveNext()">Lock Output & Next</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-panel glass-panel">
+                <div class="palette-header">
+                    <span>Navigation Matrix</span>
+                    <span style="color: white; font-weight: normal; opacity: 0.7;">27 Nodes</span>
+                </div>
+                <div class="palette-grid" id="palette-grid">
+                    </div>
+                <div class="legend">
+                    <div><div class="legend-box" style="background: var(--attempted); box-shadow: 0 0 8px var(--attempted-glow);"></div> Locked</div>
+                    <div><div class="legend-box" style="background: var(--unattempted); box-shadow: 0 0 8px var(--unattempted-glow);"></div> Pending</div>
+                    <div><div class="legend-box" style="background: var(--not-visited);"></div> Unseen</div>
+                    <div><div class="legend-box review-shape" style="background: var(--review); box-shadow: 0 0 8px var(--review-glow);"></div> Review</div>
+                </div>
+                <div style="padding: 20px; border-top: 1px solid var(--panel-border); background: rgba(0,0,0,0.3);">
+                    <button style="width: 100%; padding: 15px; font-size: 16px; background: #ff2a2a; border:none; box-shadow: 0 5px 15px rgba(255,42,42,0.4);" onclick="submitTest()">INITIATE SYSTEM SHUTDOWN (SUBMIT)</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- Stable Time Management ---
+        document.getElementById('current-date').innerText = new Date().toLocaleDateString();
+        setInterval(() => { document.getElementById('current-time').innerText = new Date().toLocaleTimeString(); }, 1000);
+
+        function showScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(screenId).classList.add('active');
+        }
+
+        // Screen 1 Timer
+        let waitTime = 35; 
+        const waitTimerSpan = document.getElementById('wait-timer');
+        const proceedBtn = document.getElementById('btn-proceed');
+        
+        const introInterval = setInterval(() => {
+            waitTime--;
+            waitTimerSpan.innerText = waitTime;
+            if (waitTime <= 0) {
+                clearInterval(introInterval);
+                waitTimerSpan.parentElement.innerHTML = '<span style="color: var(--attempted); font-weight:bold; text-shadow: 0 0 10px var(--attempted-glow);">Protocols Bypassed. Access Granted.</span>';
+                proceedBtn.disabled = false;
+                proceedBtn.classList.add('glowing-btn');
+                proceedBtn.style.background = 'transparent';
+            }
+        }, 1000);
+
+        // --- Stable Webcam Access ---
+        let userStream = null;
+        async function startCamera() {
+            try {
+                userStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+                const videoSetup = document.getElementById('webcam-setup');
+                videoSetup.srcObject = userStream;
+                videoSetup.style.display = 'block';
+                document.getElementById('btn-camera').style.display = 'none';
+                checkFormCompletion();
+            } catch (err) {
+                alert("Optical Sensor (Camera) access is mandatory for session integrity.");
+            }
+        }
+
+        const inputs = ['inp-roll', 'inp-name', 'inp-age', 'inp-dob'];
+        inputs.forEach(id => document.getElementById(id).addEventListener('input', checkFormCompletion));
+
+        function checkFormCompletion() {
+            const allFilled = inputs.every(id => document.getElementById(id).value.trim() !== '');
+            document.getElementById('btn-start-test').disabled = !(allFilled && userStream);
+        }
+
+        // --- UI Interactions ---
+        function toggleLeftTab(tab) {
+            document.querySelectorAll('.panel-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.settings-content').forEach(c => c.style.display = 'none');
+            event.target.classList.add('active');
+            document.getElementById(`tab-${tab}`).style.display = 'block';
+        }
+
+        // Stability: Zoom Control
+        document.getElementById('ui-zoom').addEventListener('input', (e) => {
+            document.getElementById('q-container').style.transform = `scale(${e.target.value})`;
+            document.getElementById('q-container').style.transformOrigin = "top left";
+            e.target.previousElementSibling.querySelector('span').innerText = `(${e.target.value}x)`;
+        });
+
+        // 3D Tilt Logic
+        const tiltArea = document.getElementById('tilt-container');
+        document.getElementById('tilt-toggle').addEventListener('change', (e) => {
+            if(!e.target.checked) tiltArea.style.transform = "none";
+        });
+        
+        tiltArea.addEventListener('mousemove', (e) => {
+            if(!document.getElementById('tilt-toggle').checked) return;
+            const rect = tiltArea.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            const rotateX = ((y - centerY) / centerY) * -3; 
+            const rotateY = ((x - centerX) / centerX) * 3;
+            document.getElementById('q-container').style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(${document.getElementById('ui-zoom').value})`;
+        });
+        tiltArea.addEventListener('mouseleave', () => {
+            document.getElementById('q-container').style.transform = `scale(${document.getElementById('ui-zoom').value})`;
+        });
+
+        // --- Core Engine & Math Rendering ---
+        const totalQuestions = 27;
+        let currentQuestion = 1;
+        let qStates = new Array(totalQuestions + 1).fill(0); 
+        
+        // Transcribed Question Database
+        const questionDB = {
+            1: { type: 'SA', text: `<p>Find nature of roots of quadratic equation: $$x^2 - 2x + 17 = 0$$</p>` },
+            2: { type: 'SA', text: `<p>If $\\alpha, \\beta$ are roots of quadratic equation $x^2 - 5x + 40 = 0$ find value of $$\\frac{\\alpha}{\\beta} + \\frac{\\beta}{\\alpha}$$</p>` },
+            3: { type: 'SCA', text: `<p>The graph for the following eqn will be $$x^2 - 18x + 64 = 0$$</p>`, options: ["(i) Upwards parabola", "(ii) Upwards hyperbola", "(iii) Downwards parabola", "(iv) Downwards hyperbola"], inputType: 'radio' },
+            4: { type: 'SA', text: `<p>Make factor tree of 144</p>` },
+            5: { type: 'SA', text: `<p>If sum of first $p$ terms of an AP is $ap^2 + bp$ find its common difference.</p>` },
+            6: { type: 'SA', text: `<p>Find value of $1 + 3 + 5 \\dots + 201$</p>` },
+            7: { type: 'SA', text: `<p>In AP $S_5 + S_7 = 167$ and $S_{10} = 235$ then find the first term of AP ($S_n = $ sum of n terms of AP)</p>` },
+            8: { type: 'SA', text: `<p>The sum of first $q$ terms of an AP is $63q - 3q^2$, if its $p^{th}$ term is $-60$ find $p$.</p>` },
+            9: { type: 'SA', text: `<p>Prove that $\\sqrt{5}$ is irrational</p>` },
+            10: { type: 'SA', text: `<p>Find value of $\\tan 45^\\circ + \\tan 60^\\circ \\tan 30^\\circ + \\cos 90^\\circ$</p>` },
+            11: { type: 'SCA', text: `<p>Which of the following is an Arithmetic Progression?</p>`, options: ["(A) 3, 6, 12, 24, ...", "(B) 7, 11, 15, 19, ...", "(C) 2, 4, 8, 16, ...", "(D) 1, 3, 7, 15, ..."], inputType: 'radio' },
+            12: { type: 'SA', text: `<p>Find the first term and the common difference of the AP: $-9, -5, -1, 3, \\dots$</p>` },
+            13: { type: 'SA', text: `<p>Find the 30th term of the AP: $6, 10, 14, 18, \\dots$</p>` },
+            14: { type: 'SA', text: `<p>Which term of the AP $8, 13, 18, 23, \\dots$ is equal to 153?</p>` },
+            15: { type: 'SA', text: `<p>Determine the number of terms in the AP $15, 19, 23, \\dots, 111$.</p>` },
+            16: { type: 'SCA', text: `<p><b>Assertion (A):</b> Every arithmetic progression has a constant common difference.<br><br><b>Reason (R):</b> The difference between any two consecutive terms of an AP is always the same.</p>`, options: ["(a) Both A and R are true and R is the correct explanation of A.", "(b) Both A and R are true but R is not the correct explanation of A.", "(c) A is true but R is false.", "(d) A is false but R is true."], inputType: 'radio' },
+            17: { type: 'SA', text: `<p><b>Case Study:</b> A staircase has 20 steps. The height of the first step is 15 cm, and each successive step is 3 cm higher than the previous one. Answer the following:<br><br>(i) Identify the first term and the common difference.<br>(ii) Find the height of the 12th step.<br>(iii) Find the height of the last step.<br>(iv) Explain why the sequence forms an AP.</p>` },
+            18: { type: 'SA', text: `<p>The 7th term of an AP is 31 and the 15th term is 63. Find the first term and the common difference.</p>` },
+            19: { type: 'SA', text: `<p>The 6th term of an AP is three times its first term and the 11th term is 47. Find the AP.</p>` },
+            20: { type: 'SA', text: `<p><b>Competency-Based:</b> A student saves ₹400 in the first month and increases the saving by ₹100 every month.<br><br>(i) Write the first five monthly savings.<br>(ii) Find the saving made in the 18th month.</p>` },
+            21: { type: 'SA', text: `<p><b>HOTS:</b> In an AP, $a_{10} - a_4 = 36$. Find the common difference.</p>` },
+            22: { type: 'SA', text: `<p>Three consecutive terms of an AP have a sum of 96. If the common difference is 4, find the three numbers.</p>` },
+            23: { type: 'SA', text: `<p>Find the middle term of the AP: $10, 7, 4, \\dots, -62$.</p>` },
+            24: { type: 'SA', text: `<p>If the $p^{th}$ term of an AP is $q$ and its $q^{th}$ term is $p$ then its $(p + q)^{th}$ term is:</p>` },
+            25: { type: 'SA', text: `<p>How many numbers are there between 101 and 999, which are divisible by both 2 and 5?</p>` },
+            26: { type: 'SA', text: `<p><b>Case study:</b> <br><br><img src="https://i.ibb.co/h1ZTX7fW/Chat-GPT-Image-Jun-28-2026-07-08-57-AM.png" alt="Construction" style="max-width:100%; border-radius:8px; margin:10px 0; border: 1px solid var(--accent);"><br><br>A contract on construction job specifies a penalty for delay of completion beyond a certain date as follows: ₹200 for the first day, ₹250 for the second day, ₹300 for the third day, etc. the penalty for each succeeding day being ₹50 more than for the preceding day. How much money the contractor has to pay as penalty, if he has delayed the work by 30 days?</p>` },
+            27: { type: 'SA', text: `<p>A train travels a distance of 480 km at a uniform speed. If the speed had been 8 km/h less, then it would have taken 3 hours more to cover the same distance. We need to find the speed of the train.</p>` }
+        };
+
+        function initTest() {
+            document.getElementById('disp-name').innerText = document.getElementById('inp-name').value;
+            document.getElementById('disp-roll').innerText = document.getElementById('inp-roll').value;
+            document.getElementById('webcam-test').srcObject = userStream;
+            
+            showScreen('screen3');
+            loadQuestion(1);
+            startMainTimer();
+        }
+
+        function buildPalette() {
+            const grid = document.getElementById('palette-grid');
+            grid.innerHTML = '';
+            for (let i = 1; i <= totalQuestions; i++) {
+                const btn = document.createElement('button');
+                btn.className = 'q-btn';
+                btn.innerText = i;
+                btn.onclick = () => loadQuestion(i);
+                
+                if (qStates[i] === 0) btn.classList.add('not-visited');
+                else if (qStates[i] === 1) btn.classList.add('unattempted');
+                else if (qStates[i] === 2) btn.classList.add('attempted');
+                else if (qStates[i] === 3) btn.classList.add('review');
+                
+                if (i === currentQuestion) btn.classList.add('active-q');
+                
+                grid.appendChild(btn);
+            }
+        }
+
+        function loadQuestion(num) {
+            currentQuestion = num;
+            if (qStates[num] === 0) qStates[num] = 1; 
+            
+            document.getElementById('q-num-display').innerText = num;
+            const qData = questionDB[num];
+
+            const badge = document.getElementById('q-format-badge');
+            badge.innerText = qData.type;
+            badge.style.borderColor = qData.type === 'SCA' ? 'var(--accent)' : '#f39c12';
+            badge.style.color = qData.type === 'SCA' ? 'var(--accent)' : '#f39c12';
+            badge.style.boxShadow = qData.type === 'SCA' ? '0 0 8px rgba(0,210,255,0.2)' : '0 0 8px rgba(243,156,18,0.2)';
+
+            let optionsHtml = '';
+            if (qData.type === 'SCA') {
+                optionsHtml += '<ul class="options-list">';
+                qData.options.forEach((opt) => {
+                    optionsHtml += `<li><label><input type="${qData.inputType}" name="ans-grp"> <span style="margin-top:2px; width:100%;">${opt}</span></label></li>`;
+                });
+                optionsHtml += '</ul>';
+            } else if (qData.type === 'SA') {
+                optionsHtml += `<textarea id="sa-ans" rows="5" style="width:100%; margin-top:25px; padding:15px; border-radius:6px; background:rgba(0,0,0,0.3); color:white; border:1px solid #475569; font-size:16px;" placeholder="Type your subjective answer here..."></textarea>`;
+            }
+
+            const container = document.getElementById('q-container');
+            container.innerHTML = qData.text + optionsHtml;
+            
+            // Explicitly force MathJax to re-scan and typeset the new HTML content
+            if (window.MathJax && window.MathJax.typesetPromise) {
+                MathJax.typesetClear([container]);
+                MathJax.typesetPromise([container]).catch(function (err) {
+                    console.error('MathJax Error:', err.message);
+                });
+            }
+            buildPalette();
+        }
+
+        function isAnswered() {
+            if (document.getElementById('sa-ans')) {
+                return document.getElementById('sa-ans').value.trim() !== '';
+            }
+            return Array.from(document.querySelectorAll('input[name="ans-grp"]')).some(inp => inp.checked);
+        }
+
+        function saveNext() {
+            qStates[currentQuestion] = isAnswered() ? 2 : 1;
+            if (currentQuestion < totalQuestions) loadQuestion(currentQuestion + 1);
+            else buildPalette();
+        }
+
+        function markReview() {
+            qStates[currentQuestion] = 3;
+            if (currentQuestion < totalQuestions) loadQuestion(currentQuestion + 1);
+            else buildPalette();
+        }
+
+        function clearResponse() {
+            if (document.getElementById('sa-ans')) {
+                document.getElementById('sa-ans').value = '';
+            } else {
+                document.querySelectorAll('input[name="ans-grp"]').forEach(inp => inp.checked = false);
+            }
+            qStates[currentQuestion] = 1;
+            buildPalette();
+        }
+
+        // Test Timer Logic
+        let testTime = 80 * 60; 
+        function startMainTimer() {
+            const timerSpan = document.getElementById('test-timer');
+            const interval = setInterval(() => {
+                testTime--;
+                let m = Math.floor(testTime / 60);
+                let s = testTime % 60;
+                timerSpan.innerText = `${m}:${s < 10 ? '0'+s : s}`;
+                if (testTime <= 0) { clearInterval(interval); submitTest(true); }
+            }, 1000);
+        }
+
+        function submitTest(auto = false) {
+            if(auto || confirm("WARNING: Irreversible Action. Confirm System Shutdown and Final Submission?")) {
+                document.body.innerHTML = `<div style="display:flex; height:100vh; align-items:center; justify-content:center; background:#0b0f19; color:white; flex-direction:column; text-align:center;">
+                <h1 style="color:var(--attempted); text-shadow: 0 0 20px var(--attempted-glow); font-size: 40px;">DATA LOCKED</h1>
+                <p style="color:var(--text-muted); margin-top:20px; font-size: 18px;">Proctoring sensor disengaged. You may close the terminal.</p></div>`;
+                if(userStream) userStream.getTracks().forEach(track => track.stop());
+            }
+        }
+    </script>
+</body>
+</html>
