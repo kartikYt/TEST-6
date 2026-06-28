@@ -13,7 +13,7 @@
                 processEscapes: true
             },
             startup: {
-                typeset: false // We trigger typesetting manually when questions load
+                typeset: false 
             }
         };
     </script>
@@ -107,7 +107,7 @@
             box-shadow: 0 5px 20px rgba(0, 210, 255, 0.15);
         }
 
-        /* --- Registration & Wait Screen --- */
+        /* --- UI Boxes --- */
         .centered-box { 
             margin: auto; width: 650px; border-radius: 12px; 
             display: flex; flex-direction: column; max-height: 85vh; 
@@ -129,7 +129,7 @@
         #webcam-preview-container { text-align: center; border: 2px dashed #475569; padding: 15px; border-radius: 8px; background: rgba(0,0,0,0.3); }
         #webcam-setup { width: 100%; max-width: 250px; border-radius: 6px; display: none; margin: 10px auto; background: #000; box-shadow: 0 5px 15px rgba(0,0,0,0.5);}
 
-        /* --- Screen 3: Test Engine --- */
+        /* --- Screen 4: Test Engine --- */
         .test-engine { display: flex; flex-grow: 1; height: calc(100vh - 65px); gap: 15px; padding: 15px; }
         
         /* Left Panel */
@@ -223,18 +223,54 @@
                 <div style="margin: 25px 0; border-top: 1px solid rgba(255,255,255,0.1);"></div>
                 <h4 style="color: var(--accent); margin-bottom: 10px;">Module: Mathematics</h4>
                 <ul style="margin-left: 20px; font-size: 15px; line-height: 1.8; color: var(--text-muted);">
-                    <li><strong>Format Verification:</strong> The engine will supply <span style="color: white;">SCA (Single Correct)</span> and <span style="color: white;">SA (Subjective Answer)</span> formats. Utilize the text boxes for subjective proofs.</li>
                     <li><strong>3D Rendering Engine:</strong> UI depth mapping is active. Hover over options to inspect.</li>
                     <li><strong>Math Engine:</strong> High-fidelity MathJax v3 rendering is online.</li>
+                    <li><strong>Format:</strong> You will be presented with the official question paper digitally.</li>
                 </ul>
             </div>
             <div class="box-footer">
-                <button id="btn-proceed" disabled onclick="showScreen('screen2')" style="padding: 12px 25px; font-size: 15px;">Initialize Identity Verification</button>
+                <button id="btn-proceed" disabled onclick="showScreen('screen2')" style="padding: 12px 25px; font-size: 15px;">Read Board Instructions</button>
             </div>
         </div>
     </div>
 
     <div id="screen2" class="screen">
+        <header>
+            <div style="font-size: 20px; font-weight: bold; color: var(--accent);">
+                CBSE Class 10th 2027 - Board Guidelines
+            </div>
+        </header>
+        <div class="centered-box glass-panel" style="margin-top: 40px; width: 750px;">
+            <div class="box-header">
+                <h3 style="color: white;">Official Examination Instructions</h3>
+            </div>
+            <div class="box-content">
+                <ul style="margin-left: 20px; font-size: 16px; line-height: 1.8; color: var(--text-main);">
+                    <li>Please check that this digital question paper contains <strong>27 questions</strong>.</li>
+                    <li>The question paper comprises multiple sections. Read internal choices carefully.</li>
+                    <li>Use of physical calculators or digital overlays is strictly prohibited.</li>
+                    <li>Draw neat figures wherever required. Take $\pi = 22/7$ wherever required if not stated.</li>
+                    <li>Review your answers thoroughly before final submission of the physical copy.</li>
+                </ul>
+                
+                <div style="margin-top: 30px; padding: 20px; background: rgba(255, 42, 42, 0.15); border: 2px solid #ff2a2a; border-radius: 8px; box-shadow: 0 0 20px rgba(255, 42, 42, 0.2);">
+                    <strong style="color: #ff5555; font-size: 20px; display: flex; align-items: center; gap: 10px; text-transform: uppercase;">
+                        ⚠️ CRITICAL RED NOTE
+                    </strong>
+                    <p style="color: white; margin-top: 12px; font-size: 16px; font-weight: 500; line-height: 1.6;">
+                        This digital portal functions as a secure Question Paper Viewer and Progress Tracker ONLY. <br><br>
+                        <strong>ALL ANSWERS MUST BE SOLVED AND WRITTEN IN THE PHYSICAL ANSWER SHEET PROVIDED TO YOU BY THE INVIGILATOR.</strong><br><br>
+                        Do not attempt to type subjective proofs into this terminal. Use the UI toggles only to mark questions as "Solved on Paper" to track your progress.
+                    </p>
+                </div>
+            </div>
+            <div class="box-footer">
+                <button onclick="showScreen('screen3')" class="glowing-btn" style="padding: 12px 25px; font-size: 15px; background: transparent;">I Acknowledge & Understand</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="screen3" class="screen">
         <header>
             <div style="font-size: 20px; font-weight: bold; color: var(--accent);">
                 Cbse class 10th 2027 test 6 - Authentication
@@ -267,10 +303,10 @@
         </div>
     </div>
 
-    <div id="screen3" class="screen">
+    <div id="screen4" class="screen">
         <header>
             <div style="display: flex; align-items: center; gap: 20px;">
-                <strong style="font-size: 18px; letter-spacing: 1px; color: var(--accent);">Cbse class 10th 2027 test 6 - Assessment</strong>
+                <strong style="font-size: 18px; letter-spacing: 1px; color: var(--accent);">Cbse class 10th 2027 test 6 - Question Viewer</strong>
             </div>
             <div style="background: rgba(255, 42, 42, 0.1); border: 1px solid var(--unattempted); color: #ff5555; padding: 8px 20px; border-radius: 4px; font-weight: bold; letter-spacing: 2px; box-shadow: 0 0 15px var(--unattempted-glow);">
                 T-MINUS: <span id="test-timer" style="font-size: 20px;">180:00</span>
@@ -298,9 +334,9 @@
                 </div>
 
                 <div class="settings-content" id="tab-info" style="display: none; color: var(--text-muted);">
-                    <p>Identify formats carefully.</p>
-                    <p style="margin-top: 10px; color: white;">Radio Buttons = SCA</p>
-                    <p style="color: white;">Text Area = SA</p>
+                    <p><strong>Reminder:</strong></p>
+                    <p style="margin-top: 10px; color: #ff5555; font-weight:bold;">All subjective answers must be written on the physical sheet.</p>
+                    <p style="margin-top: 10px; color: white;">Use the checkbox in the SA questions merely to mark them green on your palette for time management.</p>
                 </div>
                 
                 <div class="candidate-box">
@@ -329,10 +365,10 @@
                 <div class="action-bar">
                     <div style="display: flex; gap: 15px;">
                         <button style="background: rgba(255, 183, 0, 0.1); color: var(--review); border-color: var(--review);" onclick="markReview()">Mark Review & Next</button>
-                        <button style="background: transparent; color: var(--text-muted); border-color: #475569;" onclick="clearResponse()">Wipe Data</button>
+                        <button style="background: transparent; color: var(--text-muted); border-color: #475569;" onclick="clearResponse()">Clear UI Track</button>
                     </div>
                     <div>
-                        <button style="background: rgba(0, 255, 136, 0.1); border-color: var(--attempted); color: var(--attempted);" class="glowing-btn" onclick="saveNext()">Lock Output & Next</button>
+                        <button style="background: rgba(0, 255, 136, 0.1); border-color: var(--attempted); color: var(--attempted);" class="glowing-btn" onclick="saveNext()">Update Track & Next</button>
                     </div>
                 </div>
             </div>
@@ -345,13 +381,13 @@
                 <div class="palette-grid" id="palette-grid">
                     </div>
                 <div class="legend">
-                    <div><div class="legend-box" style="background: var(--attempted); box-shadow: 0 0 8px var(--attempted-glow);"></div> Locked</div>
-                    <div><div class="legend-box" style="background: var(--unattempted); box-shadow: 0 0 8px var(--unattempted-glow);"></div> Pending</div>
+                    <div><div class="legend-box" style="background: var(--attempted); box-shadow: 0 0 8px var(--attempted-glow);"></div> Solved</div>
+                    <div><div class="legend-box" style="background: var(--unattempted); box-shadow: 0 0 8px var(--unattempted-glow);"></div> Unsolved</div>
                     <div><div class="legend-box" style="background: var(--not-visited);"></div> Unseen</div>
                     <div><div class="legend-box review-shape" style="background: var(--review); box-shadow: 0 0 8px var(--review-glow);"></div> Review</div>
                 </div>
                 <div style="padding: 20px; border-top: 1px solid var(--panel-border); background: rgba(0,0,0,0.3);">
-                    <button style="width: 100%; padding: 15px; font-size: 16px; background: #ff2a2a; border:none; box-shadow: 0 5px 15px rgba(255,42,42,0.4);" onclick="submitTest()">INITIATE SYSTEM SHUTDOWN (SUBMIT)</button>
+                    <button style="width: 100%; padding: 15px; font-size: 16px; background: #ff2a2a; border:none; box-shadow: 0 5px 15px rgba(255,42,42,0.4);" onclick="submitTest()">INITIATE SYSTEM SHUTDOWN (FINISH)</button>
                 </div>
             </div>
         </div>
@@ -448,7 +484,7 @@
         let currentQuestion = 1;
         let qStates = new Array(totalQuestions + 1).fill(0); 
         
-        // Transcribed Question Database
+        // Transcribed Question Database (SA Questions no longer have textareas)
         const questionDB = {
             1: { type: 'SA', text: `<p>Find nature of roots of quadratic equation: $$x^2 - 2x + 17 = 0$$</p>` },
             2: { type: 'SA', text: `<p>If $\\alpha, \\beta$ are roots of quadratic equation $x^2 - 5x + 40 = 0$ find value of $$\\frac{\\alpha}{\\beta} + \\frac{\\beta}{\\alpha}$$</p>` },
@@ -484,7 +520,7 @@
             document.getElementById('disp-roll').innerText = document.getElementById('inp-roll').value;
             document.getElementById('webcam-test').srcObject = userStream;
             
-            showScreen('screen3');
+            showScreen('screen4');
             loadQuestion(1);
             startMainTimer();
         }
@@ -530,13 +566,21 @@
                 });
                 optionsHtml += '</ul>';
             } else if (qData.type === 'SA') {
-                optionsHtml += `<textarea id="sa-ans" rows="5" style="width:100%; margin-top:25px; padding:15px; border-radius:6px; background:rgba(0,0,0,0.3); color:white; border:1px solid #475569; font-size:16px;" placeholder="Type your subjective answer here..."></textarea>`;
+                // Replaced typing textarea with a simple tracker checkbox
+                optionsHtml += `<div style="margin-top:35px; padding:20px; border: 1px solid #475569; border-radius:8px; background:rgba(0,0,0,0.3);">
+                    <label style="display:flex; align-items:center; cursor:pointer; width:100%; color: var(--text-main);">
+                        <input type="checkbox" name="ans-grp" style="margin-right:20px; width:22px; height:22px; accent-color:var(--attempted);"> 
+                        <div>
+                            <strong style="color:white; display:block; margin-bottom:5px;">[DECLARATION OF COMPLETION]</strong>
+                            I have completely solved and written the answer for this subjective question on my physical answer sheet.
+                        </div>
+                    </label>
+                </div>`;
             }
 
             const container = document.getElementById('q-container');
             container.innerHTML = qData.text + optionsHtml;
             
-            // Explicitly force MathJax to re-scan and typeset the new HTML content
             if (window.MathJax && window.MathJax.typesetPromise) {
                 MathJax.typesetClear([container]);
                 MathJax.typesetPromise([container]).catch(function (err) {
@@ -547,9 +591,8 @@
         }
 
         function isAnswered() {
-            if (document.getElementById('sa-ans')) {
-                return document.getElementById('sa-ans').value.trim() !== '';
-            }
+            // Because the custom tracking checkbox for SA and the SCA options both use name="ans-grp",
+            // this single check cleanly handles both formats!
             return Array.from(document.querySelectorAll('input[name="ans-grp"]')).some(inp => inp.checked);
         }
 
@@ -566,11 +609,7 @@
         }
 
         function clearResponse() {
-            if (document.getElementById('sa-ans')) {
-                document.getElementById('sa-ans').value = '';
-            } else {
-                document.querySelectorAll('input[name="ans-grp"]').forEach(inp => inp.checked = false);
-            }
+            document.querySelectorAll('input[name="ans-grp"]').forEach(inp => inp.checked = false);
             qStates[currentQuestion] = 1;
             buildPalette();
         }
@@ -592,7 +631,7 @@
             if(auto || confirm("WARNING: Irreversible Action. Confirm System Shutdown and Final Submission?")) {
                 document.body.innerHTML = `<div style="display:flex; height:100vh; align-items:center; justify-content:center; background:#0b0f19; color:white; flex-direction:column; text-align:center;">
                 <h1 style="color:var(--attempted); text-shadow: 0 0 20px var(--attempted-glow); font-size: 40px;">DATA LOCKED</h1>
-                <p style="color:var(--text-muted); margin-top:20px; font-size: 18px;">Proctoring sensor disengaged. You may close the terminal.</p></div>`;
+                <p style="color:var(--text-muted); margin-top:20px; font-size: 18px;">Proctoring sensor disengaged. You must now hand over your physical answer sheet to the invigilator.</p></div>`;
                 if(userStream) userStream.getTracks().forEach(track => track.stop());
             }
         }
